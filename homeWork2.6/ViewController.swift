@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBAction func remindUsername() {
         showAlert(with: "Username", and: "Your name is User")
     }
+    
     @IBAction func remindPassword() {
         showAlert(with: "Password", and: "Your password is Password")
     }
