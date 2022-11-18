@@ -8,17 +8,13 @@
 import UIKit
 
 class UserViewController: UIViewController {
-
-    var user: String!
     
     @IBOutlet var helloUserLabel: UILabel!
+    
+    var user: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         helloUserLabel.text = "Hello, " + user
     }
-
-    @IBAction func logoutAction() {
-        dismiss(animated: true)
-    }    
 }

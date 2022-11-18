@@ -7,26 +7,33 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class StartViewController: UIViewController {
+    
     @IBOutlet var usernameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
+    private var login = "User"
+    private var password = "Password"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let userVC = segue.destination as? UserViewController {
             userVC.user = usernameTF.text
         }
-        guard usernameTF.text == "User", passwordTF.text == "Password" else {
-            showAlert(with: "Please, try again", and: "Incorrect username or password")
-            return
-        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
-        if let _ = segue.source as? UserViewController {
-            usernameTF.text = ""
-            passwordTF.text = ""
+        usernameTF.text = ""
+        passwordTF.text = ""
+    }
+    
+    @IBAction func loginActionButton() {
+        guard usernameTF.text == login, passwordTF.text == password else {
+            showAlert(with: "Please, try again", and: "Incorrect username or password")
+            return
         }
     }
     
@@ -38,16 +45,13 @@ class ViewController: UIViewController {
         showAlert(with: "Password", and: "Your password is Password")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+
 }
 
-extension ViewController {
+extension StartViewController {
     private func showAlert(with title: String, and massage: String) {
         let alert = UIAlertController(title: title, message: massage, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-            self.usernameTF.text = ""
             self.passwordTF.text = ""
         }
         alert.addAction(okAction)
