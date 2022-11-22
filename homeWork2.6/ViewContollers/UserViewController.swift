@@ -11,10 +11,13 @@ class UserViewController: UIViewController {
     
     @IBOutlet var helloUserLabel: UILabel!
     
-    var user: String!
+    let user = User.getUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        helloUserLabel.text = "Hello, " + user
+        helloUserLabel.text = "Hello, " + user.person.surname
     }
+    
+    
+    
 }

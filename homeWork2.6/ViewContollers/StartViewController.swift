@@ -12,13 +12,7 @@ final class StartViewController: UIViewController {
     @IBOutlet var usernameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
-    private var user = "User"
-    private var password = "Password"
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let userVC = segue.destination as? UserViewController else { return }
-            userVC.user = usernameTF.text
-    }
+    private let user = User.getUser()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -31,7 +25,7 @@ final class StartViewController: UIViewController {
     }
     
     @IBAction func loginActionButton() {
-        guard usernameTF.text == user, passwordTF.text == password else {
+        guard usernameTF.text == user.login, passwordTF.text == user.password else {
             showAlert(with: "Please, try again", and: "Incorrect username or password", textField: passwordTF)
             return
         }
@@ -41,8 +35,8 @@ final class StartViewController: UIViewController {
     
     @IBAction func remindUserData(_ sender: UIButton ) {
         sender.tag == 0
-        ? showAlert(with: "Username", and: "Your name is \(user)")
-        : showAlert(with: "Password", and: "Your password is \(password)")
+        ? showAlert(with: "Username", and: "Your name is \(user.login)")
+        : showAlert(with: "Password", and: "Your password is \(user.password)")
     }
 }
 
